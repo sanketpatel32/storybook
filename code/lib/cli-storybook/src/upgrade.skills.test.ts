@@ -202,4 +202,28 @@ describe('upgrade: refreshing the skills', () => {
 
     expect(installSkills).not.toHaveBeenCalled();
   });
+
+  it.each([
+    { dryRun: true, calls: 0 },
+    { dryRun: false, calls: 1 },
+  ])(
+    'installs and dedupes $calls time(s) in a monorepo when dryRun is $dryRun',
+    async ({ dryRun, calls }) => {
+      const installDependencies = vi.fn(async () => {});
+      const dedupeDependencies = vi.fn(async () => {});
+      const monorepo = project('/repo/a/.storybook');
+      Object.assign(monorepo.packageManager, {
+        type: 'pnpm',
+        installDependencies,
+        dedupeDependencies,
+        isStorybookInMonorepo: () => true,
+      });
+      useProjects(monorepo);
+
+      await upgrade({ ...baseOptions, dryRun, yes: true });
+
+      expect(installDependencies).toHaveBeenCalledTimes(calls);
+      expect(dedupeDependencies).toHaveBeenCalledTimes(calls);
+    }
+  );
 });
