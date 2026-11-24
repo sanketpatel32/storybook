@@ -1,3 +1,8 @@
+## 11.0.0-beta.6
+
+- Addon-MCP: Remove toolsets option and X-MCP-Toolsets header - [#37676](https://github.com/storybookjs/storybook/pull/37676), thanks @kasperpeulen!
+- Agent skills: Test command in AGENTS.md, review only when asked - [#37421](https://github.com/storybookjs/storybook/pull/37421), thanks @kasperpeulen!
+
 ## 11.0.0-beta.5
 
 - Addon Vitest: Report a mismatching storybook version at startup - [#37626](https://github.com/storybookjs/storybook/pull/37626), thanks @huang-julien!
